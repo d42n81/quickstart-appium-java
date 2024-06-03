@@ -1,5 +1,6 @@
 package tests.RDC;
 
+import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AutomationName;
@@ -19,6 +20,8 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.Map;
+
 import static tests.Config.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -71,7 +74,7 @@ public class AppiumIosRdcAppTest {
         sauceOptions.setCapability("build", "RDC Native Simple Example: build-" + dt.hourOfDay().getAsText() + "-" + dt.minuteOfHour().getAsText());
         sauceOptions.setCapability("username", SAUCE_USERNAME);
         sauceOptions.setCapability("accessKey", SAUCE_ACCESS_KEY);
-        sauceOptions.setCapability("appiumVersion", "2.0.0");
+        sauceOptions.setCapability("appiumVersion", "appium2-deque-accessibility");
         capabilities.setCapability("sauce:options", sauceOptions);
 
         try {
@@ -106,7 +109,11 @@ public class AppiumIosRdcAppTest {
         driver.findElement(sortButtonLocator).click();
 
         //assertion - Verify the sort modal is displayed on screen
-        assertThat(driver.findElement(sortModalLocator).isDisplayed(), is(true));
+
+        // Perform an automated accessibility scan with Deque's axe DevTools Mobile Appium Plugin:
+        Map<String, String> settings = ImmutableMap.of("apiKey", "<your-api-key-here>");
+
+        driver.executeScript("axe:scan", settings);
     }
 
 

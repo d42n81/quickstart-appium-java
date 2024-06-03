@@ -5,6 +5,8 @@ This project contains TestNG Java examples for two examples of tests that can be
 * The Second is an iOS Appium test run against the [Swage Labs (React) mobile app](https://github.com/saucelabs/my-demo-app-rn/releases) testing on a Sauce Labs Real Device
 
 ## Important information
+### Deque axe DevTools Mobile Appium Plugin
+The iOS Appium test run has been modified to include references to SauceLabs' appium2-deque-accessibility capability to perform automated digital accessibility scans during testing. In order to run tests you must add your axe DevTools Mobile API key to the AppiumIosRdcAppTest.java file. 
 ### Environment variables for Sauce Labs
 The examples in this repository that can run on Sauce Labs use environment variables, make sure you've added the following
 
